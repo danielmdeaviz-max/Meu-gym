@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a2b18">
+  <meta name="description" content="Convite virtual para a inauguração da Clínica Brasil Odonto em 01 de outubro de 2026.">
+  <title>Inauguração | Clínica Brasil Odonto</title>
+  <style>
+    :root{
+      --green:#0a2b18; --green2:#104524; --green3:#176333;
+      --gold:#e4c45e; --gold2:#f1dc8b; --cream:#fff8df;
+      --text:#fffaf0; --muted:#d8d0b9; --shadow:0 24px 70px rgba(0,0,0,.32);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;min-width:0;overflow-x:hidden;background:var(--green);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+    button,a{font:inherit}
+    img{max-width:100%;height:auto}
+
+    .app{min-height:100svh;background:
+      radial-gradient(circle at 50% -10%,#2e7140 0%,rgba(46,113,64,.2) 30%,transparent 55%),
+      linear-gradient(180deg,#0c341e 0%,#071b10 100%)}
+
+    header{padding:22px 18px 10px;text-align:center}
+    .brand{display:inline-flex;align-items:center;gap:9px;color:var(--gold2);font-weight:800;letter-spacing:.08em;font-size:12px;text-transform:uppercase}
+    .brand-dot{width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 18px rgba(228,196,94,.7)}
+
+    .tabs-wrap{position:sticky;top:0;z-index:20;padding:10px 14px 12px;background:rgba(7,27,16,.88);backdrop-filter:blur(16px);border-bottom:1px solid rgba(228,196,94,.14)}
+    .tabs{width:min(760px,100%);margin:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+    .tab{border:1px solid rgba(228,196,94,.22);background:#0d3b21;color:#e9e1ca;border-radius:14px;padding:11px 6px;cursor:pointer;font-weight:800;font-size:13px;min-width:0;transition:.2s}
+    .tab:hover{transform:translateY(-1px)}
+    .tab.active{background:var(--gold);color:#12351e;border-color:var(--gold)}
+
+    main{width:min(760px,100%);margin:auto;padding:18px 14px 50px}
+    .panel{display:none;animation:fade .25s ease}
+    .panel.active{display:block}
+    @keyframes fade{from{opacity:.3;transform:translateY(5px)}to{opacity:1;transform:none}}
+
+    .hero-card{padding:18px;border:1px solid rgba(228,196,94,.2);border-radius:30px;background:rgba(255,248,223,.055);box-shadow:var(--shadow);overflow:hidden}
+    .logo-frame{width:100%;max-width:500px;margin:0 auto 22px;border-radius:22px;overflow:hidden;background:#eee5c8;box-shadow:0 18px 50px rgba(0,0,0,.28)}
+    .logo-frame img{display:block;width:100%;height:auto}
+
+    .eyebrow{text-align:center;color:var(--gold2);font-size:12px;font-weight:900;letter-spacing:.26em;text-transform:uppercase;margin:8px 0 12px}
+    h1{margin:0;text-align:center;color:var(--gold2);font-family:Georgia,"Times New Roman",serif;font-size:clamp(42px,11vw,76px);line-height:.98;letter-spacing:-.025em;overflow-wrap:anywhere;word-break:normal;text-shadow:0 5px 25px rgba(0,0,0,.35)}
+    .lead{max-width:620px;margin:20px auto 0;text-align:center;font-size:clamp(17px,4.5vw,21px);line-height:1.55;color:#fff8e9;overflow-wrap:anywhere}
+    .date{display:block;width:min(500px,100%);margin:22px auto 0;padding:15px 18px;border-radius:18px;background:var(--gold);color:#10351d;text-align:center;font-weight:950;font-size:clamp(17px,4.5vw,22px);box-shadow:0 10px 30px rgba(0,0,0,.25)}
+
+    .actions{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:18px auto 0;max-width:520px}
+    .action{display:flex;align-items:center;justify-content:center;gap:8px;min-height:50px;border-radius:15px;text-decoration:none;border:1px solid rgba(228,196,94,.25);background:#104524;color:#fff8e9;font-weight:850;cursor:pointer;transition:.2s}
+    .action:hover{transform:translateY(-1px);background:#176333}
+    .action.primary{background:var(--gold);color:#12351e;border-color:var(--gold)}
+
+    .section-title{font-family:Georgia,"Times New Roman",serif;color:var(--gold2);font-size:32px;text-align:center;margin:0 0 8px}
+    .section-sub{text-align:center;color:var(--muted);line-height:1.5;margin:0 auto 20px;max-width:610px}
+    .media-card{border-radius:24px;overflow:hidden;background:#0d3b21;border:1px solid rgba(228,196,94,.2);box-shadow:var(--shadow)}
+    .media-card img{display:block;width:100%;height:auto}
+    .caption{padding:16px 17px 18px}
+    .caption h3{margin:0 0 6px;color:var(--gold2);font-size:19px}
+    .caption p{margin:0;color:#eee7d6;line-height:1.55;overflow-wrap:anywhere}
+
+    .info-grid{display:grid;gap:12px;margin-top:18px}
+    .info{padding:17px;border-radius:19px;background:#0d3b21;border:1px solid rgba(228,196,94,.18)}
+    .info strong{display:block;color:var(--gold2);margin-bottom:6px;font-size:15px}
+    .info span{display:block;color:#fff8e9;line-height:1.55;overflow-wrap:anywhere}
+
+    .countdown{margin:18px 0;padding:18px;border-radius:20px;background:linear-gradient(135deg,#123e22,#0b2a18);border:1px solid rgba(228,196,94,.2);text-align:center}
+    .countdown-label{color:var(--muted);font-size:13px;margin-bottom:10px}
+    .timer{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+    .unit{padding:10px 5px;border-radius:14px;background:rgba(255,248,223,.07)}
+    .unit b{display:block;color:var(--gold2);font-size:25px}
+    .unit small{color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.08em}
+
+    .notice{margin-top:18px;padding:15px 16px;border-radius:17px;background:#f4ecd2;color:#183d24;text-align:center;font-weight:750;line-height:1.45}
+
+    footer{padding:0 18px 45px;text-align:center;color:#bdb6a2;font-size:13px;line-height:1.5}
+    footer strong{color:var(--gold2)}
+
+    @media(max-width:390px){
+      .tabs{grid-template-columns:repeat(2,1fr)}
+      .actions{grid-template-columns:1fr}
+      .hero-card{padding:14px}
+      main{padding-left:10px;padding-right:10px}
+    }
+    @media(min-width:700px){
+      .info-grid{grid-template-columns:repeat(2,1fr)}
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="brand"><span class="brand-dot"></span> Clínica Brasil Odonto</div>
+  </header>
+
+  <nav class="tabs-wrap" aria-label="Navegação do convite">
+    <div class="tabs">
+      <button class="tab active" data-tab="convite" type="button">💌 Convite</button>
+      <button class="tab" data-tab="local" type="button">📍 Local</button>
+      <button class="tab" data-tab="horarios" type="button">🕐 Horários</button>
+      <button class="tab" data-tab="clinica" type="button">🦷 Clínica</button>
+    </div>
+  </nav>
+
+  <main>
+    <section id="convite" class="panel active">
+      <div class="hero-card">
+        <div class="logo-frame"><img src="assets/logo.jpeg" alt="Logo da Clínica Brasil Odonto"></div>
+        <p class="eyebrow">Você é nosso convidado</p>
+        <h1>Inauguração</h1>
+        <p class="lead">Um novo capítulo começa. Venha celebrar conosco a chegada da <strong>Clínica Brasil Odonto</strong>.</p>
+        <div class="date">01 DE OUTUBRO DE 2026</div>
+        <div class="actions">
+          <button class="action primary" type="button" data-go="local">📍 Ver localização</button>
+          <button class="action" type="button" data-go="horarios">🕐 Ver horários</button>
+        </div>
+      </div>
+      <div class="countdown">
+        <div class="countdown-label" id="countdownLabel">Contagem regressiva para a inauguração</div>
+        <div class="timer" aria-live="polite">
+          <div class="unit"><b id="days">--</b><small>dias</small></div>
+          <div class="unit"><b id="hours">--</b><small>horas</small></div>
+          <div class="unit"><b id="minutes">--</b><small>min</small></div>
+          <div class="unit"><b id="seconds">--</b><small>seg</small></div>
+        </div>
+      </div>
+      <div class="notice">Será um prazer receber você neste momento especial. 💚✨</div>
+    </section>
+
+    <section id="local" class="panel">
+      <h2 class="section-title">📍 Nossa localização</h2>
+      <p class="section-sub">Tudo preparado para receber você no dia da inauguração.</p>
+      <div class="media-card">
+        <img src="assets/localizacao.jpeg" alt="Arte com a localização da Clínica Brasil Odonto">
+        <div class="caption">
+          <h3>Clínica Brasil Odonto</h3>
+          <p><strong>Rua Cláudio Sanders, 447</strong><br>Centro · Ananindeua - PA</p>
+        </div>
+      </div>
+      <div class="actions">
+        <a class="action primary" href="https://www.google.com/maps/search/?api=1&query=Rua%20Cl%C3%A1udio%20Sanders%2C%20447%2C%20Centro%2C%20Ananindeua%20PA" target="_blank" rel="noopener">🗺️ Abrir no mapa</a>
+        <button class="action" type="button" data-go="convite">💌 Voltar ao convite</button>
+      </div>
+    </section>
+
+    <section id="horarios" class="panel">
+      <h2 class="section-title">🕐 Horário de funcionamento</h2>
+      <p class="section-sub">Confira os horários informados pela clínica.</p>
+      <div class="media-card">
+        <img src="assets/horarios.jpeg" alt="Arte com o horário de funcionamento da Clínica Brasil Odonto">
+      </div>
+      <div class="info-grid">
+        <div class="info"><strong>Segunda a sexta</strong><span>08h às 19h</span></div>
+        <div class="info"><strong>Sábado</strong><span>08h às 12h</span></div>
+      </div>
+      <div class="actions">
+        <button class="action primary" type="button" data-go="convite">💌 Voltar ao convite</button>
+        <button class="action" type="button" data-go="local">📍 Ver localização</button>
+      </div>
+    </section>
+
+    <section id="clinica" class="panel">
+      <h2 class="section-title">🦷 Clínica Brasil Odonto</h2>
+      <p class="section-sub">Um espaço pensado para cuidar do seu sorriso com atenção e acolhimento.</p>
+      <div class="media-card">
+        <img src="assets/logo.jpeg" alt="Logo da Clínica Brasil Odonto">
+        <div class="caption">
+          <h3>Seu sorriso é a nossa missão!</h3>
+          <p>Inauguração em <strong>01 de outubro de 2026</strong>.</p>
+        </div>
+      </div>
+      <div class="info-grid">
+        <div class="info"><strong>📍 Endereço</strong><span>Rua Cláudio Sanders, 447 · Centro · Ananindeua - PA</span></div>
+        <div class="info"><strong>🕐 Atendimento</strong><span>Segunda a sexta: 08h às 19h<br>Sábado: 08h às 12h</span></div>
+      </div>
+      <div class="actions">
+        <button class="action primary" type="button" data-go="convite">💌 Voltar ao convite</button>
+        <button class="action" type="button" data-go="local">📍 Ver localização</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>01/10/2026</strong></p>
+    <p>Clínica Brasil Odonto · Ananindeua - PA</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+  const tabs=[...document.querySelectorAll('.tab')];
+  const panels=[...document.querySelectorAll('.panel')];
+
+  function openTab(id){
+    panels.forEach(p=>p.classList.toggle('active',p.id===id));
+    tabs.forEach(t=>t.classList.toggle('active',t.dataset.tab===id));
+    window.scrollTo({top:0,behavior:'smooth'});
+    history.replaceState(null,'','#'+id);
+  }
+
+  tabs.forEach(t=>t.addEventListener('click',()=>openTab(t.dataset.tab)));
+  document.querySelectorAll('[data-go]').forEach(el=>el.addEventListener('click',()=>openTab(el.dataset.go)));
+
+  const initial=location.hash.slice(1);
+  if(panels.some(p=>p.id===initial)) openTab(initial);
+
+  const target=new Date('2026-10-01T08:00:00-03:00').getTime();
+  const els={d:document.getElementById('days'),h:document.getElementById('hours'),m:document.getElementById('minutes'),s:document.getElementById('seconds')};
+  const label=document.getElementById('countdownLabel');
+  function tick(){
+    let diff=target-Date.now();
+    if(diff<=0){
+      els.d.textContent='00';els.h.textContent='00';els.m.textContent='00';els.s.textContent='00';
+      label.textContent='A inauguração chegou! 🎉';return;
+    }
+    const day=86400000,hour=3600000,min=60000,sec=1000;
+    const d=Math.floor(diff/day); diff%=day;
+    const h=Math.floor(diff/hour); diff%=hour;
+    const m=Math.floor(diff/min); diff%=min;
+    const s=Math.floor(diff/sec);
+    els.d.textContent=String(d).padStart(2,'0');
+    els.h.textContent=String(h).padStart(2,'0');
+    els.m.textContent=String(m).padStart(2,'0');
+    els.s.textContent=String(s).padStart(2,'0');
+  }
+  tick(); setInterval(tick,1000);
+})();
+</script>
+</body>
+</html>
