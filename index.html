@@ -1,6 +1,507 @@
-Meu-gym/
-├── assets/
-│   ├── horarios.jpeg
-│   ├── localizacao.jpeg
-│   └── logo.jpeg
-└── index.html
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+<title>Inauguração | Clínica Brasil Odonto</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #062c1b;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+/* FUNDO */
+.page {
+    width: 100%;
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at top, #175c37 0%, #082e1c 42%, #031c11 100%);
+    padding: 20px 14px 40px;
+}
+
+/* CONTAINER */
+.container {
+    width: 100%;
+    max-width: 680px;
+    margin: 0 auto;
+}
+
+/* LOGO */
+.logo-box {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px auto 24px;
+}
+
+.logo-box img {
+    display: block;
+    width: 100%;
+    max-width: 560px;
+    height: auto;
+    border-radius: 22px;
+    box-shadow: 0 15px 40px rgba(0,0,0,.35);
+}
+
+/* ABERTURA */
+.kicker {
+    text-align: center;
+    color: #f3d76b;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 4px;
+    margin-bottom: 12px;
+}
+
+h1 {
+    text-align: center;
+    color: #f5dc73;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(38px, 10vw, 70px);
+    line-height: 1;
+    margin-bottom: 20px;
+    overflow-wrap: anywhere;
+}
+
+.intro {
+    text-align: center;
+    font-size: clamp(16px, 4.5vw, 20px);
+    line-height: 1.6;
+    color: #f7f4e9;
+    max-width: 620px;
+    margin: 0 auto 25px;
+}
+
+/* DATA */
+.date {
+    width: 100%;
+    background: linear-gradient(135deg, #f5dc73, #dcb94b);
+    color: #07351f;
+    border-radius: 22px;
+    padding: 18px 12px;
+    text-align: center;
+    font-size: clamp(17px, 4.5vw, 25px);
+    font-weight: 900;
+    margin: 0 auto 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+
+/* CARTÕES */
+.card {
+    width: 100%;
+    background: rgba(12, 67, 39, .85);
+    border: 1px solid rgba(232, 207, 100, .35);
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 18px;
+    box-shadow: 0 12px 30px rgba(0,0,0,.20);
+}
+
+.card-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #f2d667;
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: #f7f5eb;
+    font-size: 17px;
+    line-height: 1.55;
+    overflow-wrap: anywhere;
+    word-break: normal;
+}
+
+/* BOTÕES */
+.buttons {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin: 25px 0;
+}
+
+.btn {
+    width: 100%;
+    min-height: 56px;
+    border: none;
+    border-radius: 18px;
+    padding: 15px 18px;
+    background: #f3d76b;
+    color: #07351f;
+    font-size: 16px;
+    font-weight: 800;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: transform .2s, box-shadow .2s;
+    box-shadow: 0 8px 20px rgba(0,0,0,.25);
+}
+
+.btn:active {
+    transform: scale(.97);
+}
+
+.btn.secondary {
+    background: #0e6138;
+    color: #fff;
+    border: 1px solid #d9bd52;
+}
+
+/* SEÇÕES */
+.section {
+    display: none;
+    animation: aparecer .4s ease;
+}
+
+.section.active {
+    display: block;
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* IMAGENS INFORMATIVAS */
+.info-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 18px;
+    margin-top: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.3);
+}
+
+/* NAVEGAÇÃO */
+.nav {
+    position: sticky;
+    bottom: 15px;
+    z-index: 20;
+    width: 100%;
+    background: rgba(3, 28, 17, .94);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(242,214,103,.35);
+    border-radius: 22px;
+    padding: 9px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 7px;
+    box-shadow: 0 12px 35px rgba(0,0,0,.4);
+}
+
+.nav button {
+    border: none;
+    border-radius: 15px;
+    padding: 12px 5px;
+    background: transparent;
+    color: #d9ddce;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.nav button.active {
+    background: #f2d667;
+    color: #07351f;
+}
+
+/* RODAPÉ */
+.footer {
+    text-align: center;
+    margin-top: 25px;
+    color: #bfc9be;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/* CELULAR */
+@media (max-width: 480px) {
+
+    .page {
+        padding: 14px 12px 30px;
+    }
+
+    .logo-box img {
+        border-radius: 18px;
+    }
+
+    .card {
+        padding: 17px;
+    }
+
+    .card p {
+        font-size: 16px;
+    }
+
+    .nav button {
+        font-size: 11px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+<div class="container">
+
+    <!-- LOGO -->
+    <div class="logo-box">
+        <img src="assets/logo.jpeg"
+             alt="Clínica Brasil Odonto">
+    </div>
+
+
+    <!-- INÍCIO -->
+    <section id="inicio" class="section active">
+
+        <div class="kicker">
+            VOCÊ É NOSSO CONVIDADO
+        </div>
+
+        <h1>
+            INAUGURAÇÃO
+        </h1>
+
+        <p class="intro">
+            Um novo capítulo começa. Venha celebrar conosco
+            a chegada da <strong>Clínica Brasil Odonto</strong>.
+        </p>
+
+        <div class="date">
+            01 DE OUTUBRO DE 2026
+        </div>
+
+        <div class="card">
+            <div class="card-title">
+                📍 Local
+            </div>
+
+            <p>
+                Rua Cláudio Sanders, 447<br>
+                Centro · Ananindeua - PA
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="card-title">
+                🕐 Funcionamento
+            </div>
+
+            <p>
+                Segunda a sexta: 08h às 19h<br>
+                Sábado: 08h às 12h
+            </p>
+        </div>
+
+        <div class="buttons">
+
+            <a class="btn"
+               href="https://www.google.com/maps/search/?api=1&query=Rua+Cláudio+Sanders+447+Centro+Ananindeua+PA"
+               target="_blank">
+                📍 Ver localização
+            </a>
+
+            <button class="btn secondary"
+                    onclick="adicionarAgenda()">
+                📅 Adicionar à agenda
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- LOCAL -->
+    <section id="local" class="section">
+
+        <div class="kicker">
+            COMO CHEGAR
+        </div>
+
+        <h1>LOCALIZAÇÃO</h1>
+
+        <div class="card">
+
+            <div class="card-title">
+                📍 Nosso endereço
+            </div>
+
+            <p>
+                Rua Cláudio Sanders, 447<br>
+                Centro<br>
+                Ananindeua - PA
+            </p>
+
+        </div>
+
+        <img class="info-image"
+             src="assets/localizacao.jpeg"
+             alt="Localização da Clínica Brasil Odonto">
+
+        <div class="buttons">
+
+            <a class="btn"
+               href="https://www.google.com/maps/search/?api=1&query=Rua+Cláudio+Sanders+447+Centro+Ananindeua+PA"
+               target="_blank">
+                🧭 Abrir no Google Maps
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- HORÁRIOS -->
+    <section id="horarios" class="section">
+
+        <div class="kicker">
+            ESTAMOS ESPERANDO POR VOCÊ
+        </div>
+
+        <h1>HORÁRIOS</h1>
+
+        <img class="info-image"
+             src="assets/horarios.jpeg"
+             alt="Horário de funcionamento da Clínica Brasil Odonto">
+
+        <div class="card">
+
+            <div class="card-title">
+                🕐 Funcionamento
+            </div>
+
+            <p>
+                <strong>Segunda a sexta:</strong><br>
+                08h às 19h
+                <br><br>
+                <strong>Sábado:</strong><br>
+                08h às 12h
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- BOTÕES DE NAVEGAÇÃO -->
+    <nav class="nav">
+
+        <button class="active"
+                onclick="mostrarSecao('inicio', this)">
+            🏠<br>Início
+        </button>
+
+        <button onclick="mostrarSecao('local', this)">
+            📍<br>Local
+        </button>
+
+        <button onclick="mostrarSecao('horarios', this)">
+            🕐<br>Horários
+        </button>
+
+    </nav>
+
+
+    <div class="footer">
+        Clínica Brasil Odonto<br>
+        Seu sorriso é a nossa missão! 🦷
+    </div>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* TROCA DE ABAS */
+function mostrarSecao(id, botao) {
+
+    const secoes = document.querySelectorAll(".section");
+
+    secoes.forEach(function(secao) {
+        secao.classList.remove("active");
+    });
+
+    const escolhida = document.getElementById(id);
+
+    if (escolhida) {
+        escolhida.classList.add("active");
+    }
+
+    const botoes = document.querySelectorAll(".nav button");
+
+    botoes.forEach(function(btn) {
+        btn.classList.remove("active");
+    });
+
+    botao.classList.add("active");
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+/* ADICIONAR À AGENDA */
+function adicionarAgenda() {
+
+    const inicio = "20261001T080000";
+    const fim = "20261001T120000";
+
+    const titulo = encodeURIComponent(
+        "Inauguração - Clínica Brasil Odonto"
+    );
+
+    const detalhes = encodeURIComponent(
+        "Inauguração da Clínica Brasil Odonto."
+    );
+
+    const local = encodeURIComponent(
+        "Rua Cláudio Sanders, 447, Centro, Ananindeua - PA"
+    );
+
+    const url =
+        "https://calendar.google.com/calendar/render?action=TEMPLATE" +
+        "&text=" + titulo +
+        "&dates=" + inicio + "/" + fim +
+        "&details=" + detalhes +
+        "&location=" + local;
+
+    window.open(url, "_blank");
+}
+
+</script>
+
+</body>
+</html>
