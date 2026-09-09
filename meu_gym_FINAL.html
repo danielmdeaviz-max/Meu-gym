@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meu Gym - Treinos da Semana</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f4f5f7;color:#171b23;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+header{background:#111827;color:white;padding:28px 18px}header h1{margin:0;font-size:30px}header p{margin:6px 0 0;color:#cbd5e1}
+main{max-width:760px;margin:auto;padding:16px}
+.week{background:white;border-radius:16px;padding:15px;margin-bottom:16px;border:1px solid #e5e7eb}
+.week h2{margin:0 0 12px;font-size:19px}
+.week-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.week-grid a{display:block;text-align:center;padding:10px 4px;border-radius:10px;background:#eef0f3;color:#111827;text-decoration:none;font-weight:800;font-size:12px}
+.day{font-size:12px;font-weight:900;letter-spacing:.4px;color:#697386}
+.day h2{color:#171b23;font-size:21px;margin:3px 0 0}
+section.day{background:white;border:1px solid #e5e7eb;border-radius:17px;margin-bottom:16px;padding:16px;box-shadow:0 2px 8px #00000008}
+.table-head{display:grid;grid-template-columns:1fr 90px;gap:10px;border-bottom:2px solid #e5e7eb;padding:13px 0 8px;color:#697386;font-size:11px;font-weight:800}
+.exercise{padding:14px 0;border-bottom:1px solid #e5e7eb}
+.exercise-name{font-weight:800;font-size:15px}.rep{color:#697386;font-size:13px;margin-top:3px}
+.set-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.set-row label{display:flex;align-items:center;gap:4px;font-size:10px;color:#697386;font-weight:700}
+.set-row input[type=text]{width:52px;padding:7px 5px;border:1px solid #d5d9e0;border-radius:8px;font-size:12px}
+.set-row input[type=checkbox]{width:20px;height:20px;accent-color:#111827}
+.note{margin-top:12px;padding:11px;background:#f0f2f5;border-radius:10px;font-size:13px}
+footer{text-align:center;color:#697386;font-size:11px;padding:10px 0 30px}
+@media(max-width:400px){.week-grid a{font-size:10px}.table-head{grid-template-columns:1fr 82px}}
+</style>
+</head>
+<body>
+<header><h1>Meu Gym 💪</h1><p>Plano de treino • Segunda a sexta</p></header>
+<main>
+<div class="week">
+<h2>Semana</h2>
+<div class="week-grid">
+<a href="#day0">SEGUNDA</a><a href="#day1">TERÇA</a><a href="#day2">QUARTA</a><a href="#day3">QUINTA</a><a href="#day4">SEXTA</a>
+</div>
+</div>
+
+    <section class="day" id="day0">
+      <div class="day-head"><div><div class="day">SEGUNDA</div><h2>PEITO + TRÍCEPS</h2></div></div>
+      <div class="table-head"><span>EXERCÍCIO</span><span>SÉRIES × REPS</span></div>
+      
+        <div class="exercise">
+          <div class="exercise-name">1. Supino reto</div>
+          <div class="rep">4 × 6–10</div>
+          <div class="set-row">
+            <label>S1<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S2<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S3<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S4<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label>
+          </div>
+        </div>
+        <div class="exercise">
+          <div class="exercise-name">2. Supino inclinado com halteres</div>
+          <div class="rep">3 × 8–12</div>
+          <div class="set-row">
+            <label>S1<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S2<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S3<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label>
+          </div>
+        </div>
+        <div class="exercise">
+          <div class="exercise-name">3. Crucifixo/crossover</div>
+          <div class="rep">3 × 10–15</div>
+          <div class="set-row">
+            <label>S1<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S2<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S3<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label>
+          </div>
+        </div>
+        <div class="exercise">
+          <div class="exercise-name">4. Chest press</div>
+          <div class="rep">3 × 8–12</div>
+          <div class="set-row">
+            <label>S1<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S2<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S3<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label>
+          </div>
+        </div>
+        <div class="exercise">
+          <div class="exercise-name">5. Tríceps corda</div>
+          <div class="rep">3 × 10–15</div>
+          <div class="set-row">
+            <label>S1<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S2<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S3<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label>
+          </div>
+        </div>
+        <div class="exercise">
+          <div class="exercise-name">6. Tríceps francês</div>
+          <div class="rep">3 × 8–12</div>
+          <div class="set-row">
+            <label>S1<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S2<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S3<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label>
+          </div>
+        </div>
+        <div class="exercise">
+          <div class="exercise-name">7. Tríceps máquina</div>
+          <div class="rep">2 × 12–15</div>
+          <div class="set-row">
+            <label>S1<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S2<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label>
+          </div>
+        </div>
+      <div class="note">Final: 5–10 min de cardio leve.</div>
+    </section>
+    <section class="day" id="day1">
+      <div class="day-head"><div><div class="day">TERÇA</div><h2>COSTAS + BÍCEPS</h2></div></div>
+      <div class="table-head"><span>EXERCÍCIO</span><span>SÉRIES × REPS</span></div>
+      
+        <div class="exercise">
+          <div class="exercise-name">1. Puxada alta</div>
+          <div class="rep">4 × 8–12</div>
+          <div class="set-row">
+            <label>S1<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S2<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S3<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S4<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label>
+          </div>
+        </div>
+        <div class="exercise">
+          <div class="exercise-name">2. Remada baixa</div>
+          <div class="rep">3 × 8–12</div>
+          <div class="set-row">
+            <label>S1<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S2<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S3<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label>
+          </div>
+        </div>
+        <div class="exercise">
+          <div class="exercise-name">3. Remada unilateral</div>
+          <div class="rep">3 × 8–12</div>
+          <div class="set-row">
+            <label>S1<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S2<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S3<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label>
+          </div>
+        </div>
+        <div class="exercise">
+          <div class="exercise-name">4. Pulldown / braços estendidos</div>
+          <div class="rep">2 × 12–15</div>
+          <div class="set-row">
+            <label>S1<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S2<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label>
+          </div>
+        </div>
+        <div class="exercise">
+          <div class="exercise-name">5. Rosca direta</div>
+          <div class="rep">3 × 8–12</div>
+          <div class="set-row">
+            <label>S1<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S2<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S3<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label>
+          </div>
+        </div>
+        <div class="exercise">
+          <div class="exercise-name">6. Rosca alternada</div>
+          <div class="rep">3 × 10–12</div>
+          <div class="set-row">
+            <label>S1<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S2<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S3<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label>
+          </div>
+        </div>
+        <div class="exercise">
+          <div class="exercise-name">7. Rosca martelo</div>
+          <div class="rep">2 × 10–15</div>
+          <div class="set-row">
+            <label>S1<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S2<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label>
+          </div>
+        </div>
+      
+    </section>
+    <section class="day" id="day2">
+      <div class="day-head"><div><div class="day">QUARTA</div><h2>PERNAS + GLÚTEOS</h2></div></div>
+      <div class="table-head"><span>EXERCÍCIO</span><span>SÉRIES × REPS</span></div>
+      
+        <div class="exercise">
+          <div class="exercise-name">1. Cadeira flexora</div>
+          <div class="rep">3 × 10–15</div>
+          <div class="set-row">
+            <label>S1<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S2<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S3<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label>
+          </div>
+        </div>
+        <div class="exercise">
+          <div class="exercise-name">2. Hip thrust</div>
+          <div class="rep">3 × 8–12</div>
+          <div class="set-row">
+            <label>S1<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S2<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S3<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label>
+          </div>
+        </div>
+        <div class="exercise">
+          <div class="exercise-name">3. Leg press, amplitude confortável</div>
+          <div class="rep">3 × 10–12</div>
+          <div class="set-row">
+            <label>S1<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S2<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S3<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label>
+          </div>
+        </div>
+        <div class="exercise">
+          <div class="exercise-name">4. Cadeira extensora</div>
+          <div class="rep">2 × 12–15*</div>
+          <div class="set-row">
+            <label>S1<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S2<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label>
+          </div>
+        </div>
+        <div class="exercise">
+          <div class="exercise-name">5. Abdutora</div>
+          <div class="rep">2 × 12–15</div>
+          <div class="set-row">
+            <label>S1<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S2<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label>
+          </div>
+        </div>
+        <div class="exercise">
+          <div class="exercise-name">6. Panturrilha</div>
+          <div class="rep">3 × 12–20</div>
+          <div class="set-row">
+            <label>S1<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S2<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S3<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label>
+          </div>
+        </div>
+      <div class="note">Aquecimento: 5–8 min de bicicleta leve. * Cadeira extensora somente se não provocar dor.</div>
+    </section>
+    <section class="day" id="day3">
+      <div class="day-head"><div><div class="day">QUINTA</div><h2>OMBROS + PEITO</h2></div></div>
+      <div class="table-head"><span>EXERCÍCIO</span><span>SÉRIES × REPS</span></div>
+      
+        <div class="exercise">
+          <div class="exercise-name">1. Desenvolvimento com halteres/máquina</div>
+          <div class="rep">3 × 6–10</div>
+          <div class="set-row">
+            <label>S1<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S2<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S3<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label>
+          </div>
+        </div>
+        <div class="exercise">
+          <div class="exercise-name">2. Elevação lateral</div>
+          <div class="rep">4 × 10–15</div>
+          <div class="set-row">
+            <label>S1<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S2<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S3<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S4<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label>
+          </div>
+        </div>
+        <div class="exercise">
+          <div class="exercise-name">3. Crucifixo inverso</div>
+          <div class="rep">3 × 12–15</div>
+          <div class="set-row">
+            <label>S1<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S2<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S3<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label>
+          </div>
+        </div>
+        <div class="exercise">
+          <div class="exercise-name">4. Supino inclinado</div>
+          <div class="rep">3 × 8–12</div>
+          <div class="set-row">
+            <label>S1<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S2<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S3<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label>
+          </div>
+        </div>
+        <div class="exercise">
+          <div class="exercise-name">5. Crossover</div>
+          <div class="rep">3 × 12–15</div>
+          <div class="set-row">
+            <label>S1<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S2<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S3<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label>
+          </div>
+        </div>
+        <div class="exercise">
+          <div class="exercise-name">6. Elevação lateral na polia</div>
+          <div class="rep">2 × 12–15</div>
+          <div class="set-row">
+            <label>S1<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S2<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label>
+          </div>
+        </div>
+      
+    </section>
+    <section class="day" id="day4">
+      <div class="day-head"><div><div class="day">SEXTA</div><h2>BRAÇOS + COSTAS</h2></div></div>
+      <div class="table-head"><span>EXERCÍCIO</span><span>SÉRIES × REPS</span></div>
+      
+        <div class="exercise">
+          <div class="exercise-name">1. Puxada neutra</div>
+          <div class="rep">3 × 8–12</div>
+          <div class="set-row">
+            <label>S1<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S2<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S3<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label>
+          </div>
+        </div>
+        <div class="exercise">
+          <div class="exercise-name">2. Remada máquina</div>
+          <div class="rep">3 × 10–12</div>
+          <div class="set-row">
+            <label>S1<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S2<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S3<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label>
+          </div>
+        </div>
+        <div class="exercise">
+          <div class="exercise-name">3. Rosca Scott</div>
+          <div class="rep">3 × 8–12</div>
+          <div class="set-row">
+            <label>S1<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S2<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S3<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label>
+          </div>
+        </div>
+        <div class="exercise">
+          <div class="exercise-name">4. Rosca martelo</div>
+          <div class="rep">3 × 10–15</div>
+          <div class="set-row">
+            <label>S1<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S2<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S3<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label>
+          </div>
+        </div>
+        <div class="exercise">
+          <div class="exercise-name">5. Tríceps testa/máquina</div>
+          <div class="rep">3 × 8–12</div>
+          <div class="set-row">
+            <label>S1<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S2<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S3<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label>
+          </div>
+        </div>
+        <div class="exercise">
+          <div class="exercise-name">6. Tríceps corda</div>
+          <div class="rep">3 × 10–15</div>
+          <div class="set-row">
+            <label>S1<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S2<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S3<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label>
+          </div>
+        </div>
+        <div class="exercise">
+          <div class="exercise-name">7. Elevação lateral</div>
+          <div class="rep">3 × 12–15</div>
+          <div class="set-row">
+            <label>S1<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S2<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label><label>S3<input type="text" placeholder="kg"><input type="text" placeholder="reps"><input type="checkbox"></label>
+          </div>
+        </div>
+      <div class="note">Final: 5–10 min de cardio leve/moderado.</div>
+    </section>
+<footer>Os treinos completos estão nesta mesma página.</footer>
+</main>
+</body>
+</html>
