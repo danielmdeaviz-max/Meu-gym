@@ -1,0 +1,750 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111827">
+<title>Meu Gym</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f4f5f7;color:#111827;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif}
+header{background:#111827;color:#fff;padding:22px 16px}.brand{max-width:760px;margin:auto;display:flex;justify-content:space-between;align-items:center}
+h1{margin:0;font-size:28px}header p{margin:3px 0 0;color:#cbd5e1;font-size:12px}.logo{background:#fff;color:#111827;border-radius:13px;padding:12px;font-weight:900}
+main{max-width:760px;margin:auto;padding:10px 14px 40px}
+.day-radio{position:absolute;opacity:0;pointer-events:none}
+.tabs{position:sticky;top:0;z-index:30;background:#f4f5f7;padding:7px 0 12px;display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.tab{cursor:pointer;text-align:center;background:#e2e5e9;color:#626b78;border-radius:14px;padding:9px 2px;user-select:none}
+.tab b{display:block;font-size:11px}.tab small{font-size:9px;font-weight:650}
+.day-radio:checked + *{} 
+/* O mecanismo das abas é CSS puro: não depende de JavaScript. */
+.panel{display:none}
+#day-SEG:checked ~ .tabs label[for="day-SEG"],#day-TER:checked ~ .tabs label[for="day-TER"],#day-QUA:checked ~ .tabs label[for="day-QUA"],#day-QUI:checked ~ .tabs label[for="day-QUI"],#day-SEX:checked ~ .tabs label[for="day-SEX"]{background:#111827;color:#fff;box-shadow:0 5px 14px #11182722}
+#day-SEG:checked ~ .tabs ~ #panel-SEG,#day-TER:checked ~ .tabs ~ #panel-TER,#day-QUA:checked ~ .tabs ~ #panel-QUA,#day-QUI:checked ~ .tabs ~ #panel-QUI,#day-SEX:checked ~ .tabs ~ #panel-SEX{display:block}
+.hero{background:#fff;border:1px solid #e0e3e7;border-radius:20px;padding:17px;display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}
+.hero small{font-size:10px;letter-spacing:1px;font-weight:900;color:#737b88}.hero h2{margin:3px 0;font-size:21px}.hero p{margin:0;color:#737b88;font-size:12px}.hero>strong{background:#111827;color:#fff;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;font-size:13px}
+.bar{height:8px;background:#dfe2e6;border-radius:99px;overflow:hidden;margin:0 2px 12px}.bar i{display:block;width:0;height:100%;background:#111827;border-radius:99px;transition:.2s}
+.exercise{background:#fff;border:1px solid #e0e3e7;border-radius:16px;margin:8px 0;overflow:hidden}summary{list-style:none;cursor:pointer;padding:12px 13px}summary::-webkit-details-marker{display:none}
+.ex-left{display:flex;align-items:center;gap:11px}.ex-icon{width:40px;height:40px;border-radius:12px;background:#f0f2f5;display:grid;place-items:center;font-size:20px}
+.ex-left strong{display:block;font-size:14px}.ex-left small{display:block;color:#6b7280;font-size:11px;margin-top:3px}summary{display:flex;align-items:center;justify-content:space-between}.chev{color:#9ca3af;font-size:21px}details[open] .chev{transform:rotate(180deg)}
+.exercise-content{border-top:1px solid #e6e8eb;padding:12px 13px 14px}.visual{height:105px;border-radius:15px;background:#f0f2f5;display:flex;align-items:center;justify-content:space-between;padding:0 28px;margin-bottom:12px;font-size:32px}
+.person{font-size:18px;line-height:17px;text-align:center;font-weight:900}.person span{font-size:24px}
+.label{font-size:10px;font-weight:900;letter-spacing:.8px;color:#687386;margin-bottom:7px}.headers,.set-row{display:grid;grid-template-columns:44px 1fr 1fr 32px;gap:7px;align-items:center}.headers{font-size:9px;font-weight:900;color:#8a919c;padding:0 7px 2px}
+.set-row{background:#f8f9fa;border:1px solid #eceef1;border-radius:10px;padding:6px;margin-top:6px}.set-row span{font-size:10px;font-weight:900;text-align:center;color:#687386}
+.set-row input:not(.done){width:100%;border:1px solid #d7dbe0;border-radius:8px;background:#fff;padding:8px 7px;font-size:11px;outline:0}.done{width:20px;height:20px;justify-self:center;accent-color:#111827}
+.note{background:#fff;border:1px solid #e0e3e7;border-radius:14px;padding:12px;margin-top:9px;font-size:12px;color:#586171}
+.summary{margin-top:14px;background:#111827;color:#fff;border-radius:17px;padding:14px;display:grid;grid-template-columns:1fr 1fr;gap:8px}.summary div{background:#ffffff12;border-radius:11px;padding:10px}.summary b{font-size:20px;display:block}.summary span{font-size:9px;color:#cbd5e1}
+@media(max-width:390px){.tab small{font-size:8px}.hero h2{font-size:19px}}
+</style>
+</head>
+<body>
+<header><div class="brand"><div><h1>Meu Gym 💪</h1><p>Treino organizado, sem caça ao exercício.</p></div><div class="logo">MG</div></div></header>
+<main>
+<input class="day-radio" type="radio" name="day" id="day-SEG" checked><input class="day-radio" type="radio" name="day" id="day-TER" ><input class="day-radio" type="radio" name="day" id="day-QUA" ><input class="day-radio" type="radio" name="day" id="day-QUI" ><input class="day-radio" type="radio" name="day" id="day-SEX" >
+<nav class="tabs" aria-label="Dias da semana"><label for="day-SEG" class="tab"><b>SEG</b><small>Segunda</small></label><label for="day-TER" class="tab"><b>TER</b><small>Terça</small></label><label for="day-QUA" class="tab"><b>QUA</b><small>Quarta</small></label><label for="day-QUI" class="tab"><b>QUI</b><small>Quinta</small></label><label for="day-SEX" class="tab"><b>SEX</b><small>Sexta</small></label></nav>
+<section class="panel" id="panel-SEG">
+      <div class="hero"><div><small>SEGUNDA</small><h2>💥 Peito + Tríceps</h2><p>7 exercícios</p></div><strong id="pct-SEG">0%</strong></div>
+      <div class="bar"><i id="bar-SEG"></i></div>
+      <details class="exercise" data-day="SEG" data-ex="0">
+      <summary><span class="ex-left"><b class="ex-icon">🏋️</b><span><strong>Supino reto</strong><small>4 × 6–10</small></span></span><span class="chev">⌄</span></summary>
+      <div class="exercise-content">
+        <div class="visual"><div class="person">●<br><span>╱│╲</span><br><span>╱ ╲</span></div><b>🏋️</b></div>
+        <div class="label">SÉRIES</div>
+        <div class="headers"><span>SÉRIE</span><span>KG</span><span>REPS</span><span>✓</span></div>
+        <div class="set-row">
+          <span>S1</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 1 concluída">
+        </div><div class="set-row">
+          <span>S2</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 2 concluída">
+        </div><div class="set-row">
+          <span>S3</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 3 concluída">
+        </div><div class="set-row">
+          <span>S4</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 4 concluída">
+        </div>
+      </div>
+    </details><details class="exercise" data-day="SEG" data-ex="1">
+      <summary><span class="ex-left"><b class="ex-icon">↗️</b><span><strong>Supino inclinado com halteres</strong><small>3 × 8–12</small></span></span><span class="chev">⌄</span></summary>
+      <div class="exercise-content">
+        <div class="visual"><div class="person">●<br><span>╱│╲</span><br><span>╱ ╲</span></div><b>↗️</b></div>
+        <div class="label">SÉRIES</div>
+        <div class="headers"><span>SÉRIE</span><span>KG</span><span>REPS</span><span>✓</span></div>
+        <div class="set-row">
+          <span>S1</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 1 concluída">
+        </div><div class="set-row">
+          <span>S2</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 2 concluída">
+        </div><div class="set-row">
+          <span>S3</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 3 concluída">
+        </div>
+      </div>
+    </details><details class="exercise" data-day="SEG" data-ex="2">
+      <summary><span class="ex-left"><b class="ex-icon">🪽</b><span><strong>Crucifixo/crossover</strong><small>3 × 10–15</small></span></span><span class="chev">⌄</span></summary>
+      <div class="exercise-content">
+        <div class="visual"><div class="person">●<br><span>╱│╲</span><br><span>╱ ╲</span></div><b>🪽</b></div>
+        <div class="label">SÉRIES</div>
+        <div class="headers"><span>SÉRIE</span><span>KG</span><span>REPS</span><span>✓</span></div>
+        <div class="set-row">
+          <span>S1</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 1 concluída">
+        </div><div class="set-row">
+          <span>S2</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 2 concluída">
+        </div><div class="set-row">
+          <span>S3</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 3 concluída">
+        </div>
+      </div>
+    </details><details class="exercise" data-day="SEG" data-ex="3">
+      <summary><span class="ex-left"><b class="ex-icon">💪</b><span><strong>Chest press</strong><small>3 × 8–12</small></span></span><span class="chev">⌄</span></summary>
+      <div class="exercise-content">
+        <div class="visual"><div class="person">●<br><span>╱│╲</span><br><span>╱ ╲</span></div><b>💪</b></div>
+        <div class="label">SÉRIES</div>
+        <div class="headers"><span>SÉRIE</span><span>KG</span><span>REPS</span><span>✓</span></div>
+        <div class="set-row">
+          <span>S1</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 1 concluída">
+        </div><div class="set-row">
+          <span>S2</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 2 concluída">
+        </div><div class="set-row">
+          <span>S3</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 3 concluída">
+        </div>
+      </div>
+    </details><details class="exercise" data-day="SEG" data-ex="4">
+      <summary><span class="ex-left"><b class="ex-icon">🔻</b><span><strong>Tríceps corda</strong><small>3 × 10–15</small></span></span><span class="chev">⌄</span></summary>
+      <div class="exercise-content">
+        <div class="visual"><div class="person">●<br><span>╱│╲</span><br><span>╱ ╲</span></div><b>🔻</b></div>
+        <div class="label">SÉRIES</div>
+        <div class="headers"><span>SÉRIE</span><span>KG</span><span>REPS</span><span>✓</span></div>
+        <div class="set-row">
+          <span>S1</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 1 concluída">
+        </div><div class="set-row">
+          <span>S2</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 2 concluída">
+        </div><div class="set-row">
+          <span>S3</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 3 concluída">
+        </div>
+      </div>
+    </details><details class="exercise" data-day="SEG" data-ex="5">
+      <summary><span class="ex-left"><b class="ex-icon">🔨</b><span><strong>Tríceps francês</strong><small>3 × 8–12</small></span></span><span class="chev">⌄</span></summary>
+      <div class="exercise-content">
+        <div class="visual"><div class="person">●<br><span>╱│╲</span><br><span>╱ ╲</span></div><b>🔨</b></div>
+        <div class="label">SÉRIES</div>
+        <div class="headers"><span>SÉRIE</span><span>KG</span><span>REPS</span><span>✓</span></div>
+        <div class="set-row">
+          <span>S1</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 1 concluída">
+        </div><div class="set-row">
+          <span>S2</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 2 concluída">
+        </div><div class="set-row">
+          <span>S3</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 3 concluída">
+        </div>
+      </div>
+    </details><details class="exercise" data-day="SEG" data-ex="6">
+      <summary><span class="ex-left"><b class="ex-icon">⚙️</b><span><strong>Tríceps máquina</strong><small>2 × 12–15</small></span></span><span class="chev">⌄</span></summary>
+      <div class="exercise-content">
+        <div class="visual"><div class="person">●<br><span>╱│╲</span><br><span>╱ ╲</span></div><b>⚙️</b></div>
+        <div class="label">SÉRIES</div>
+        <div class="headers"><span>SÉRIE</span><span>KG</span><span>REPS</span><span>✓</span></div>
+        <div class="set-row">
+          <span>S1</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 1 concluída">
+        </div><div class="set-row">
+          <span>S2</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 2 concluída">
+        </div>
+      </div>
+    </details>
+      <div class="note">💡 Final: 5–10 min de cardio leve.</div>
+    </section><section class="panel" id="panel-TER">
+      <div class="hero"><div><small>TERÇA</small><h2>🦅 Costas + Bíceps</h2><p>7 exercícios</p></div><strong id="pct-TER">0%</strong></div>
+      <div class="bar"><i id="bar-TER"></i></div>
+      <details class="exercise" data-day="TER" data-ex="0">
+      <summary><span class="ex-left"><b class="ex-icon">⬇️</b><span><strong>Puxada alta</strong><small>4 × 8–12</small></span></span><span class="chev">⌄</span></summary>
+      <div class="exercise-content">
+        <div class="visual"><div class="person">●<br><span>╱│╲</span><br><span>╱ ╲</span></div><b>⬇️</b></div>
+        <div class="label">SÉRIES</div>
+        <div class="headers"><span>SÉRIE</span><span>KG</span><span>REPS</span><span>✓</span></div>
+        <div class="set-row">
+          <span>S1</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 1 concluída">
+        </div><div class="set-row">
+          <span>S2</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 2 concluída">
+        </div><div class="set-row">
+          <span>S3</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 3 concluída">
+        </div><div class="set-row">
+          <span>S4</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 4 concluída">
+        </div>
+      </div>
+    </details><details class="exercise" data-day="TER" data-ex="1">
+      <summary><span class="ex-left"><b class="ex-icon">🚣</b><span><strong>Remada baixa</strong><small>3 × 8–12</small></span></span><span class="chev">⌄</span></summary>
+      <div class="exercise-content">
+        <div class="visual"><div class="person">●<br><span>╱│╲</span><br><span>╱ ╲</span></div><b>🚣</b></div>
+        <div class="label">SÉRIES</div>
+        <div class="headers"><span>SÉRIE</span><span>KG</span><span>REPS</span><span>✓</span></div>
+        <div class="set-row">
+          <span>S1</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 1 concluída">
+        </div><div class="set-row">
+          <span>S2</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 2 concluída">
+        </div><div class="set-row">
+          <span>S3</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 3 concluída">
+        </div>
+      </div>
+    </details><details class="exercise" data-day="TER" data-ex="2">
+      <summary><span class="ex-left"><b class="ex-icon">↔️</b><span><strong>Remada unilateral</strong><small>3 × 8–12</small></span></span><span class="chev">⌄</span></summary>
+      <div class="exercise-content">
+        <div class="visual"><div class="person">●<br><span>╱│╲</span><br><span>╱ ╲</span></div><b>↔️</b></div>
+        <div class="label">SÉRIES</div>
+        <div class="headers"><span>SÉRIE</span><span>KG</span><span>REPS</span><span>✓</span></div>
+        <div class="set-row">
+          <span>S1</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 1 concluída">
+        </div><div class="set-row">
+          <span>S2</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 2 concluída">
+        </div><div class="set-row">
+          <span>S3</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 3 concluída">
+        </div>
+      </div>
+    </details><details class="exercise" data-day="TER" data-ex="3">
+      <summary><span class="ex-left"><b class="ex-icon">⬇️</b><span><strong>Pulldown / braços estendidos</strong><small>2 × 12–15</small></span></span><span class="chev">⌄</span></summary>
+      <div class="exercise-content">
+        <div class="visual"><div class="person">●<br><span>╱│╲</span><br><span>╱ ╲</span></div><b>⬇️</b></div>
+        <div class="label">SÉRIES</div>
+        <div class="headers"><span>SÉRIE</span><span>KG</span><span>REPS</span><span>✓</span></div>
+        <div class="set-row">
+          <span>S1</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 1 concluída">
+        </div><div class="set-row">
+          <span>S2</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 2 concluída">
+        </div>
+      </div>
+    </details><details class="exercise" data-day="TER" data-ex="4">
+      <summary><span class="ex-left"><b class="ex-icon">💪</b><span><strong>Rosca direta</strong><small>3 × 8–12</small></span></span><span class="chev">⌄</span></summary>
+      <div class="exercise-content">
+        <div class="visual"><div class="person">●<br><span>╱│╲</span><br><span>╱ ╲</span></div><b>💪</b></div>
+        <div class="label">SÉRIES</div>
+        <div class="headers"><span>SÉRIE</span><span>KG</span><span>REPS</span><span>✓</span></div>
+        <div class="set-row">
+          <span>S1</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 1 concluída">
+        </div><div class="set-row">
+          <span>S2</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 2 concluída">
+        </div><div class="set-row">
+          <span>S3</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 3 concluída">
+        </div>
+      </div>
+    </details><details class="exercise" data-day="TER" data-ex="5">
+      <summary><span class="ex-left"><b class="ex-icon">🔄</b><span><strong>Rosca alternada</strong><small>3 × 10–12</small></span></span><span class="chev">⌄</span></summary>
+      <div class="exercise-content">
+        <div class="visual"><div class="person">●<br><span>╱│╲</span><br><span>╱ ╲</span></div><b>🔄</b></div>
+        <div class="label">SÉRIES</div>
+        <div class="headers"><span>SÉRIE</span><span>KG</span><span>REPS</span><span>✓</span></div>
+        <div class="set-row">
+          <span>S1</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 1 concluída">
+        </div><div class="set-row">
+          <span>S2</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 2 concluída">
+        </div><div class="set-row">
+          <span>S3</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 3 concluída">
+        </div>
+      </div>
+    </details><details class="exercise" data-day="TER" data-ex="6">
+      <summary><span class="ex-left"><b class="ex-icon">🔨</b><span><strong>Rosca martelo</strong><small>2 × 10–15</small></span></span><span class="chev">⌄</span></summary>
+      <div class="exercise-content">
+        <div class="visual"><div class="person">●<br><span>╱│╲</span><br><span>╱ ╲</span></div><b>🔨</b></div>
+        <div class="label">SÉRIES</div>
+        <div class="headers"><span>SÉRIE</span><span>KG</span><span>REPS</span><span>✓</span></div>
+        <div class="set-row">
+          <span>S1</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 1 concluída">
+        </div><div class="set-row">
+          <span>S2</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 2 concluída">
+        </div>
+      </div>
+    </details>
+      
+    </section><section class="panel" id="panel-QUA">
+      <div class="hero"><div><small>QUARTA</small><h2>🦵 Pernas + Glúteos</h2><p>6 exercícios</p></div><strong id="pct-QUA">0%</strong></div>
+      <div class="bar"><i id="bar-QUA"></i></div>
+      <details class="exercise" data-day="QUA" data-ex="0">
+      <summary><span class="ex-left"><b class="ex-icon">🦵</b><span><strong>Cadeira flexora</strong><small>3 × 10–15</small></span></span><span class="chev">⌄</span></summary>
+      <div class="exercise-content">
+        <div class="visual"><div class="person">●<br><span>╱│╲</span><br><span>╱ ╲</span></div><b>🦵</b></div>
+        <div class="label">SÉRIES</div>
+        <div class="headers"><span>SÉRIE</span><span>KG</span><span>REPS</span><span>✓</span></div>
+        <div class="set-row">
+          <span>S1</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 1 concluída">
+        </div><div class="set-row">
+          <span>S2</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 2 concluída">
+        </div><div class="set-row">
+          <span>S3</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 3 concluída">
+        </div>
+      </div>
+    </details><details class="exercise" data-day="QUA" data-ex="1">
+      <summary><span class="ex-left"><b class="ex-icon">🍑</b><span><strong>Hip thrust</strong><small>3 × 8–12</small></span></span><span class="chev">⌄</span></summary>
+      <div class="exercise-content">
+        <div class="visual"><div class="person">●<br><span>╱│╲</span><br><span>╱ ╲</span></div><b>🍑</b></div>
+        <div class="label">SÉRIES</div>
+        <div class="headers"><span>SÉRIE</span><span>KG</span><span>REPS</span><span>✓</span></div>
+        <div class="set-row">
+          <span>S1</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 1 concluída">
+        </div><div class="set-row">
+          <span>S2</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 2 concluída">
+        </div><div class="set-row">
+          <span>S3</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 3 concluída">
+        </div>
+      </div>
+    </details><details class="exercise" data-day="QUA" data-ex="2">
+      <summary><span class="ex-left"><b class="ex-icon">↗️</b><span><strong>Leg press, amplitude confortável</strong><small>3 × 10–12</small></span></span><span class="chev">⌄</span></summary>
+      <div class="exercise-content">
+        <div class="visual"><div class="person">●<br><span>╱│╲</span><br><span>╱ ╲</span></div><b>↗️</b></div>
+        <div class="label">SÉRIES</div>
+        <div class="headers"><span>SÉRIE</span><span>KG</span><span>REPS</span><span>✓</span></div>
+        <div class="set-row">
+          <span>S1</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 1 concluída">
+        </div><div class="set-row">
+          <span>S2</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 2 concluída">
+        </div><div class="set-row">
+          <span>S3</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 3 concluída">
+        </div>
+      </div>
+    </details><details class="exercise" data-day="QUA" data-ex="3">
+      <summary><span class="ex-left"><b class="ex-icon">🦵</b><span><strong>Cadeira extensora</strong><small>2 × 12–15*</small></span></span><span class="chev">⌄</span></summary>
+      <div class="exercise-content">
+        <div class="visual"><div class="person">●<br><span>╱│╲</span><br><span>╱ ╲</span></div><b>🦵</b></div>
+        <div class="label">SÉRIES</div>
+        <div class="headers"><span>SÉRIE</span><span>KG</span><span>REPS</span><span>✓</span></div>
+        <div class="set-row">
+          <span>S1</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 1 concluída">
+        </div><div class="set-row">
+          <span>S2</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 2 concluída">
+        </div>
+      </div>
+    </details><details class="exercise" data-day="QUA" data-ex="4">
+      <summary><span class="ex-left"><b class="ex-icon">↔️</b><span><strong>Abdutora</strong><small>2 × 12–15</small></span></span><span class="chev">⌄</span></summary>
+      <div class="exercise-content">
+        <div class="visual"><div class="person">●<br><span>╱│╲</span><br><span>╱ ╲</span></div><b>↔️</b></div>
+        <div class="label">SÉRIES</div>
+        <div class="headers"><span>SÉRIE</span><span>KG</span><span>REPS</span><span>✓</span></div>
+        <div class="set-row">
+          <span>S1</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 1 concluída">
+        </div><div class="set-row">
+          <span>S2</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 2 concluída">
+        </div>
+      </div>
+    </details><details class="exercise" data-day="QUA" data-ex="5">
+      <summary><span class="ex-left"><b class="ex-icon">⬆️</b><span><strong>Panturrilha</strong><small>3 × 12–20</small></span></span><span class="chev">⌄</span></summary>
+      <div class="exercise-content">
+        <div class="visual"><div class="person">●<br><span>╱│╲</span><br><span>╱ ╲</span></div><b>⬆️</b></div>
+        <div class="label">SÉRIES</div>
+        <div class="headers"><span>SÉRIE</span><span>KG</span><span>REPS</span><span>✓</span></div>
+        <div class="set-row">
+          <span>S1</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 1 concluída">
+        </div><div class="set-row">
+          <span>S2</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 2 concluída">
+        </div><div class="set-row">
+          <span>S3</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 3 concluída">
+        </div>
+      </div>
+    </details>
+      <div class="note">💡 Aquecimento: 5–8 min de bicicleta leve. * Somente se não provocar dor.</div>
+    </section><section class="panel" id="panel-QUI">
+      <div class="hero"><div><small>QUINTA</small><h2>🎯 Ombros + Peito</h2><p>6 exercícios</p></div><strong id="pct-QUI">0%</strong></div>
+      <div class="bar"><i id="bar-QUI"></i></div>
+      <details class="exercise" data-day="QUI" data-ex="0">
+      <summary><span class="ex-left"><b class="ex-icon">⬆️</b><span><strong>Desenvolvimento com halteres/máquina</strong><small>3 × 6–10</small></span></span><span class="chev">⌄</span></summary>
+      <div class="exercise-content">
+        <div class="visual"><div class="person">●<br><span>╱│╲</span><br><span>╱ ╲</span></div><b>⬆️</b></div>
+        <div class="label">SÉRIES</div>
+        <div class="headers"><span>SÉRIE</span><span>KG</span><span>REPS</span><span>✓</span></div>
+        <div class="set-row">
+          <span>S1</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 1 concluída">
+        </div><div class="set-row">
+          <span>S2</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 2 concluída">
+        </div><div class="set-row">
+          <span>S3</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 3 concluída">
+        </div>
+      </div>
+    </details><details class="exercise" data-day="QUI" data-ex="1">
+      <summary><span class="ex-left"><b class="ex-icon">↔️</b><span><strong>Elevação lateral</strong><small>4 × 10–15</small></span></span><span class="chev">⌄</span></summary>
+      <div class="exercise-content">
+        <div class="visual"><div class="person">●<br><span>╱│╲</span><br><span>╱ ╲</span></div><b>↔️</b></div>
+        <div class="label">SÉRIES</div>
+        <div class="headers"><span>SÉRIE</span><span>KG</span><span>REPS</span><span>✓</span></div>
+        <div class="set-row">
+          <span>S1</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 1 concluída">
+        </div><div class="set-row">
+          <span>S2</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 2 concluída">
+        </div><div class="set-row">
+          <span>S3</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 3 concluída">
+        </div><div class="set-row">
+          <span>S4</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 4 concluída">
+        </div>
+      </div>
+    </details><details class="exercise" data-day="QUI" data-ex="2">
+      <summary><span class="ex-left"><b class="ex-icon">🪽</b><span><strong>Crucifixo inverso</strong><small>3 × 12–15</small></span></span><span class="chev">⌄</span></summary>
+      <div class="exercise-content">
+        <div class="visual"><div class="person">●<br><span>╱│╲</span><br><span>╱ ╲</span></div><b>🪽</b></div>
+        <div class="label">SÉRIES</div>
+        <div class="headers"><span>SÉRIE</span><span>KG</span><span>REPS</span><span>✓</span></div>
+        <div class="set-row">
+          <span>S1</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 1 concluída">
+        </div><div class="set-row">
+          <span>S2</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 2 concluída">
+        </div><div class="set-row">
+          <span>S3</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 3 concluída">
+        </div>
+      </div>
+    </details><details class="exercise" data-day="QUI" data-ex="3">
+      <summary><span class="ex-left"><b class="ex-icon">↗️</b><span><strong>Supino inclinado</strong><small>3 × 8–12</small></span></span><span class="chev">⌄</span></summary>
+      <div class="exercise-content">
+        <div class="visual"><div class="person">●<br><span>╱│╲</span><br><span>╱ ╲</span></div><b>↗️</b></div>
+        <div class="label">SÉRIES</div>
+        <div class="headers"><span>SÉRIE</span><span>KG</span><span>REPS</span><span>✓</span></div>
+        <div class="set-row">
+          <span>S1</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 1 concluída">
+        </div><div class="set-row">
+          <span>S2</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 2 concluída">
+        </div><div class="set-row">
+          <span>S3</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 3 concluída">
+        </div>
+      </div>
+    </details><details class="exercise" data-day="QUI" data-ex="4">
+      <summary><span class="ex-left"><b class="ex-icon">🪽</b><span><strong>Crossover</strong><small>3 × 12–15</small></span></span><span class="chev">⌄</span></summary>
+      <div class="exercise-content">
+        <div class="visual"><div class="person">●<br><span>╱│╲</span><br><span>╱ ╲</span></div><b>🪽</b></div>
+        <div class="label">SÉRIES</div>
+        <div class="headers"><span>SÉRIE</span><span>KG</span><span>REPS</span><span>✓</span></div>
+        <div class="set-row">
+          <span>S1</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 1 concluída">
+        </div><div class="set-row">
+          <span>S2</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 2 concluída">
+        </div><div class="set-row">
+          <span>S3</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 3 concluída">
+        </div>
+      </div>
+    </details><details class="exercise" data-day="QUI" data-ex="5">
+      <summary><span class="ex-left"><b class="ex-icon">↔️</b><span><strong>Elevação lateral na polia</strong><small>2 × 12–15</small></span></span><span class="chev">⌄</span></summary>
+      <div class="exercise-content">
+        <div class="visual"><div class="person">●<br><span>╱│╲</span><br><span>╱ ╲</span></div><b>↔️</b></div>
+        <div class="label">SÉRIES</div>
+        <div class="headers"><span>SÉRIE</span><span>KG</span><span>REPS</span><span>✓</span></div>
+        <div class="set-row">
+          <span>S1</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 1 concluída">
+        </div><div class="set-row">
+          <span>S2</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 2 concluída">
+        </div>
+      </div>
+    </details>
+      
+    </section><section class="panel" id="panel-SEX">
+      <div class="hero"><div><small>SEXTA</small><h2>💪 Braços + Costas</h2><p>7 exercícios</p></div><strong id="pct-SEX">0%</strong></div>
+      <div class="bar"><i id="bar-SEX"></i></div>
+      <details class="exercise" data-day="SEX" data-ex="0">
+      <summary><span class="ex-left"><b class="ex-icon">⬇️</b><span><strong>Puxada neutra</strong><small>3 × 8–12</small></span></span><span class="chev">⌄</span></summary>
+      <div class="exercise-content">
+        <div class="visual"><div class="person">●<br><span>╱│╲</span><br><span>╱ ╲</span></div><b>⬇️</b></div>
+        <div class="label">SÉRIES</div>
+        <div class="headers"><span>SÉRIE</span><span>KG</span><span>REPS</span><span>✓</span></div>
+        <div class="set-row">
+          <span>S1</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 1 concluída">
+        </div><div class="set-row">
+          <span>S2</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 2 concluída">
+        </div><div class="set-row">
+          <span>S3</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 3 concluída">
+        </div>
+      </div>
+    </details><details class="exercise" data-day="SEX" data-ex="1">
+      <summary><span class="ex-left"><b class="ex-icon">🚣</b><span><strong>Remada máquina</strong><small>3 × 10–12</small></span></span><span class="chev">⌄</span></summary>
+      <div class="exercise-content">
+        <div class="visual"><div class="person">●<br><span>╱│╲</span><br><span>╱ ╲</span></div><b>🚣</b></div>
+        <div class="label">SÉRIES</div>
+        <div class="headers"><span>SÉRIE</span><span>KG</span><span>REPS</span><span>✓</span></div>
+        <div class="set-row">
+          <span>S1</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 1 concluída">
+        </div><div class="set-row">
+          <span>S2</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 2 concluída">
+        </div><div class="set-row">
+          <span>S3</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 3 concluída">
+        </div>
+      </div>
+    </details><details class="exercise" data-day="SEX" data-ex="2">
+      <summary><span class="ex-left"><b class="ex-icon">💪</b><span><strong>Rosca Scott</strong><small>3 × 8–12</small></span></span><span class="chev">⌄</span></summary>
+      <div class="exercise-content">
+        <div class="visual"><div class="person">●<br><span>╱│╲</span><br><span>╱ ╲</span></div><b>💪</b></div>
+        <div class="label">SÉRIES</div>
+        <div class="headers"><span>SÉRIE</span><span>KG</span><span>REPS</span><span>✓</span></div>
+        <div class="set-row">
+          <span>S1</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 1 concluída">
+        </div><div class="set-row">
+          <span>S2</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 2 concluída">
+        </div><div class="set-row">
+          <span>S3</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 3 concluída">
+        </div>
+      </div>
+    </details><details class="exercise" data-day="SEX" data-ex="3">
+      <summary><span class="ex-left"><b class="ex-icon">🔨</b><span><strong>Rosca martelo</strong><small>3 × 10–15</small></span></span><span class="chev">⌄</span></summary>
+      <div class="exercise-content">
+        <div class="visual"><div class="person">●<br><span>╱│╲</span><br><span>╱ ╲</span></div><b>🔨</b></div>
+        <div class="label">SÉRIES</div>
+        <div class="headers"><span>SÉRIE</span><span>KG</span><span>REPS</span><span>✓</span></div>
+        <div class="set-row">
+          <span>S1</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 1 concluída">
+        </div><div class="set-row">
+          <span>S2</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 2 concluída">
+        </div><div class="set-row">
+          <span>S3</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 3 concluída">
+        </div>
+      </div>
+    </details><details class="exercise" data-day="SEX" data-ex="4">
+      <summary><span class="ex-left"><b class="ex-icon">🔻</b><span><strong>Tríceps testa/máquina</strong><small>3 × 8–12</small></span></span><span class="chev">⌄</span></summary>
+      <div class="exercise-content">
+        <div class="visual"><div class="person">●<br><span>╱│╲</span><br><span>╱ ╲</span></div><b>🔻</b></div>
+        <div class="label">SÉRIES</div>
+        <div class="headers"><span>SÉRIE</span><span>KG</span><span>REPS</span><span>✓</span></div>
+        <div class="set-row">
+          <span>S1</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 1 concluída">
+        </div><div class="set-row">
+          <span>S2</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 2 concluída">
+        </div><div class="set-row">
+          <span>S3</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 3 concluída">
+        </div>
+      </div>
+    </details><details class="exercise" data-day="SEX" data-ex="5">
+      <summary><span class="ex-left"><b class="ex-icon">🔻</b><span><strong>Tríceps corda</strong><small>3 × 10–15</small></span></span><span class="chev">⌄</span></summary>
+      <div class="exercise-content">
+        <div class="visual"><div class="person">●<br><span>╱│╲</span><br><span>╱ ╲</span></div><b>🔻</b></div>
+        <div class="label">SÉRIES</div>
+        <div class="headers"><span>SÉRIE</span><span>KG</span><span>REPS</span><span>✓</span></div>
+        <div class="set-row">
+          <span>S1</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 1 concluída">
+        </div><div class="set-row">
+          <span>S2</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 2 concluída">
+        </div><div class="set-row">
+          <span>S3</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 3 concluída">
+        </div>
+      </div>
+    </details><details class="exercise" data-day="SEX" data-ex="6">
+      <summary><span class="ex-left"><b class="ex-icon">↔️</b><span><strong>Elevação lateral</strong><small>3 × 12–15</small></span></span><span class="chev">⌄</span></summary>
+      <div class="exercise-content">
+        <div class="visual"><div class="person">●<br><span>╱│╲</span><br><span>╱ ╲</span></div><b>↔️</b></div>
+        <div class="label">SÉRIES</div>
+        <div class="headers"><span>SÉRIE</span><span>KG</span><span>REPS</span><span>✓</span></div>
+        <div class="set-row">
+          <span>S1</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 1 concluída">
+        </div><div class="set-row">
+          <span>S2</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 2 concluída">
+        </div><div class="set-row">
+          <span>S3</span><input class="kg" inputmode="decimal" placeholder="kg">
+          <input class="rp" inputmode="numeric" placeholder="reps">
+          <input class="done" type="checkbox" aria-label="Série 3 concluída">
+        </div>
+      </div>
+    </details>
+      <div class="note">💡 Final: 5–10 min de cardio leve/moderado.</div>
+    </section>
+<div class="summary"><div><b id="totalDone">0</b><span>SÉRIES CONCLUÍDAS</span></div><div><b id="daysDone">0/5</b><span>DIAS COMPLETOS</span></div></div>
+</main>
+<script>
+(function(){
+function key(d,e,s,f){return 'meugym-final-'+d+'-'+e+'-'+s+'-'+f}
+document.querySelectorAll('.exercise').forEach(card=>{
+ const d=card.dataset.day,e=card.dataset.ex;
+ card.querySelectorAll('.set-row').forEach((row,s)=>{
+  const kg=row.querySelector('.kg'),rp=row.querySelector('.rp'),done=row.querySelector('.done');
+  kg.value=localStorage.getItem(key(d,e,s,'kg'))||'';
+  rp.value=localStorage.getItem(key(d,e,s,'rp'))||'';
+  done.checked=localStorage.getItem(key(d,e,s,'done'))==='1';
+  kg.oninput=()=>localStorage.setItem(key(d,e,s,'kg'),kg.value);
+  rp.oninput=()=>localStorage.setItem(key(d,e,s,'rp'),rp.value);
+  done.onchange=()=>{localStorage.setItem(key(d,e,s,'done'),done.checked?'1':'0');update()};
+ });
+});
+function update(){
+ let total=0,done=0,full=0;
+ document.querySelectorAll('.panel').forEach(p=>{
+  const c=[...p.querySelectorAll('.done')],d=c.filter(x=>x.checked).length;
+  total+=c.length;done+=d;let pct=c.length?Math.round(d/c.length*100):0;
+  document.getElementById('bar-'+p.id.slice(6)).style.width=pct+'%';
+  document.getElementById('pct-'+p.id.slice(6)).textContent=pct+'%';
+  if(pct===100)full++;
+ });
+ document.getElementById('totalDone').textContent=done;
+ document.getElementById('daysDone').textContent=full+'/5';
+}
+update();
+})();
+</script>
+</body>
+</html>
