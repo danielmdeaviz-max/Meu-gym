@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meu Plano de Treino</title>
+<style>
+  :root { --bg:#f5f6f8; --card:#fff; --text:#18202a; --muted:#667085; --accent:#111827; --line:#e6e8ec; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; background:var(--bg); color:var(--text); line-height:1.5; }
+  header { background:#111827; color:white; padding:28px 20px; }
+  header h1 { margin:0 0 6px; font-size:28px; }
+  header p { margin:0; opacity:.8; }
+  main { max-width:900px; margin:0 auto; padding:20px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:16px; padding:18px; margin-bottom:16px; box-shadow:0 2px 8px rgba(0,0,0,.04); }
+  .day { border-left:5px solid #111827; }
+  h2 { margin:0 0 12px; font-size:20px; }
+  h3 { margin:16px 0 8px; font-size:16px; }
+  .muted { color:var(--muted); }
+  ul { margin:8px 0; padding-left:22px; }
+  li { margin:5px 0; }
+  table { width:100%; border-collapse:collapse; }
+  th,td { text-align:left; padding:9px 7px; border-bottom:1px solid var(--line); }
+  th { font-size:13px; color:var(--muted); }
+  .note { background:#f0f2f5; border-radius:12px; padding:12px 14px; }
+  .week { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
+  .week div { border:1px solid var(--line); border-radius:12px; padding:12px; text-align:center; }
+  @media(max-width:600px){ .week{grid-template-columns:repeat(2,1fr)} table{font-size:14px} }
+</style>
+</head>
+<body>
+<header>
+  <h1>Meu Plano de Treino</h1>
+  <p>Academia • Segunda a sexta • 12:00–13:30</p>
+</header>
+<main>
+  <section class="card">
+    <h2>Objetivo</h2>
+    <p>Ganhar massa muscular, melhorar definição e condicionamento, com atenção especial aos joelhos e recuperação.</p>
+    <div class="note"><strong>Regra de progressão:</strong> quando atingir o topo da faixa de repetições com boa técnica, aumente um pouco a carga e volte para a parte mais baixa da faixa.</div>
+  </section>
+
+  <section class="card">
+    <h2>Semana</h2>
+    <div class="week">
+      <div><strong>Seg</strong><br>Peito + Tríceps</div>
+      <div><strong>Ter</strong><br>Costas + Bíceps</div>
+      <div><strong>Qua</strong><br>Pernas + Glúteos</div>
+      <div><strong>Qui</strong><br>Ombros + Peito</div>
+      <div><strong>Sex</strong><br>Braços + Costas</div>
+    </div>
+  </section>
+
+  <section class="card day">
+    <h2>Segunda • Peito + Tríceps</h2>
+    <table><tr><th>Exercício</th><th>Séries × reps</th></tr>
+      <tr><td>Supino reto</td><td>4 × 6–10</td></tr>
+      <tr><td>Supino inclinado com halteres</td><td>3 × 8–12</td></tr>
+      <tr><td>Crucifixo/crossover</td><td>3 × 10–15</td></tr>
+      <tr><td>Chest press</td><td>3 × 8–12</td></tr>
+      <tr><td>Tríceps corda</td><td>3 × 10–15</td></tr>
+      <tr><td>Tríceps francês</td><td>3 × 8–12</td></tr>
+      <tr><td>Tríceps máquina</td><td>2 × 12–15</td></tr>
+    </table>
+    <p class="muted">Final: 5–10 min de cardio leve.</p>
+  </section>
+
+  <section class="card day">
+    <h2>Terça • Costas + Bíceps</h2>
+    <table><tr><th>Exercício</th><th>Séries × reps</th></tr>
+      <tr><td>Puxada alta</td><td>4 × 8–12</td></tr>
+      <tr><td>Remada baixa</td><td>3 × 8–12</td></tr>
+      <tr><td>Remada unilateral</td><td>3 × 8–12</td></tr>
+      <tr><td>Pulldown / braços estendidos</td><td>2 × 12–15</td></tr>
+      <tr><td>Rosca direta</td><td>3 × 8–12</td></tr>
+      <tr><td>Rosca alternada</td><td>3 × 10–12</td></tr>
+      <tr><td>Rosca martelo</td><td>2 × 10–15</td></tr>
+    </table>
+  </section>
+
+  <section class="card day">
+    <h2>Quarta • Pernas + Glúteos</h2>
+    <p class="muted">Aquecimento: 5–8 min de bicicleta leve.</p>
+    <table><tr><th>Exercício</th><th>Séries × reps</th></tr>
+      <tr><td>Cadeira flexora</td><td>3 × 10–15</td></tr>
+      <tr><td>Hip thrust</td><td>3 × 8–12</td></tr>
+      <tr><td>Leg press, amplitude confortável</td><td>3 × 10–12</td></tr>
+      <tr><td>Cadeira extensora</td><td>2 × 12–15*</td></tr>
+      <tr><td>Abdutora</td><td>2 × 12–15</td></tr>
+      <tr><td>Panturrilha</td><td>3 × 12–20</td></tr>
+    </table>
+    <p class="muted">* Somente se não provocar dor.</p>
+  </section>
+
+  <section class="card day">
+    <h2>Quinta • Ombros + Peito</h2>
+    <table><tr><th>Exercício</th><th>Séries × reps</th></tr>
+      <tr><td>Desenvolvimento com halteres/máquina</td><td>3 × 6–10</td></tr>
+      <tr><td>Elevação lateral</td><td>4 × 10–15</td></tr>
+      <tr><td>Crucifixo inverso</td><td>3 × 12–15</td></tr>
+      <tr><td>Supino inclinado</td><td>3 × 8–12</td></tr>
+      <tr><td>Crossover</td><td>3 × 12–15</td></tr>
+      <tr><td>Elevação lateral na polia</td><td>2 × 12–15</td></tr>
+    </table>
+  </section>
+
+  <section class="card day">
+    <h2>Sexta • Braços + Costas</h2>
+    <table><tr><th>Exercício</th><th>Séries × reps</th></tr>
+      <tr><td>Puxada neutra</td><td>3 × 8–12</td></tr>
+      <tr><td>Remada máquina</td><td>3 × 10–12</td></tr>
+      <tr><td>Rosca Scott</td><td>3 × 8–12</td></tr>
+      <tr><td>Rosca martelo</td><td>3 × 10–15</td></tr>
+      <tr><td>Tríceps testa/máquina</td><td>3 × 8–12</td></tr>
+      <tr><td>Tríceps corda</td><td>3 × 10–15</td></tr>
+      <tr><td>Elevação lateral</td><td>3 × 12–15</td></tr>
+    </table>
+    <p class="muted">Final: 5–10 min de cardio leve/moderado.</p>
+  </section>
+
+  <section class="card">
+    <h2>Alimentação • organização diária</h2>
+    <table><tr><th>Horário</th><th>Estrutura</th></tr>
+      <tr><td>08:00</td><td>Café da manhã</td></tr>
+      <tr><td>11:30</td><td>Pré-treino: carboidrato + proteína</td></tr>
+      <tr><td>12:00–13:30</td><td>Treino</td></tr>
+      <tr><td>14:00</td><td>Almoço completo: proteína + carboidrato + feijão/leguminosas + vegetais + fruta</td></tr>
+      <tr><td>17:00</td><td>Lanche com proteína + carboidrato</td></tr>
+      <tr><td>21:00</td><td>Jantar completo</td></tr>
+    </table>
+    <p class="note">Não é necessário cortar carboidratos para buscar definição. Priorize alimentação equilibrada e suficiente para sustentar os treinos.</p>
+  </section>
+
+  <section class="card">
+    <h2>Sono e recuperação</h2>
+    <ul>
+      <li>Meta aproximada: 22:30–06:30, cerca de 8 horas.</li>
+      <li>Manter horários consistentes ajuda na recuperação.</li>
+      <li>Bike à noite: manter leve; se aumentar a dor nos joelhos, reduza ou interrompa.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Joelhos</h2>
+    <p>Como existe dor nos joelhos, não treine através de dor significativa. Reduza carga/amplitude ou substitua movimentos que provoquem sintomas. Dor forte, inchaço, travamento, instabilidade ou piora progressiva merece avaliação de médico ou fisioterapeuta.</p>
+  </section>
+
+  <section class="card">
+    <h2>Meta das primeiras 4 semanas</h2>
+    <ul>
+      <li><strong>Semana 1:</strong> ajustar execução e cargas.</li>
+      <li><strong>Semana 2:</strong> aumentar algumas repetições.</li>
+      <li><strong>Semana 3:</strong> progredir carga onde fizer sentido.</li>
+      <li><strong>Semana 4:</strong> consolidar cargas e avaliar recuperação.</li>
+    </ul>
+    <h3>Acompanhe toda sexta</h3>
+    <ul>
+      <li>Cargas e repetições</li>
+      <li>Qualidade da execução</li>
+      <li>Dor nos joelhos</li>
+      <li>Horas de sono</li>
+      <li>Disposição e recuperação</li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>
